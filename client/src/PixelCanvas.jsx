@@ -12,9 +12,9 @@ const PixelCanvas = ({
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
 
-  // Pan and zoom state
-  const [scale, setScale] = useState(1);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  // Pan and zoom state - start zoomed in so pixels are visible
+  const [scale, setScale] = useState(3);
+  const [offset, setOffset] = useState({ x: 50, y: 50 });
 
   // Interaction state
   const [isPanning, setIsPanning] = useState(false);
@@ -107,7 +107,8 @@ const PixelCanvas = ({
         if (pixel) {
           ctx.fillStyle = pixel.color || '#ffffff';
         } else {
-          ctx.fillStyle = '#2a2a2a';
+          // Available pixels - light gray so they're visible
+          ctx.fillStyle = '#666666';
         }
 
         ctx.fillRect(x, y, pixelSize, pixelSize);
@@ -175,12 +176,7 @@ const PixelCanvas = ({
       const ctx = canvas.getContext('2d');
       ctx.scale(dpr, dpr);
 
-      // Center the grid on initial load
-      if (scale === 1 && offset.x === 0 && offset.y === 0) {
-        const centerX = (rect.width - gridWidth) / 2;
-        const centerY = (rect.height - gridHeight) / 2;
-        setOffset({ x: centerX, y: centerY });
-      }
+      // Don't auto-center, let the initial offset handle it
 
       draw();
     };
@@ -365,14 +361,8 @@ const PixelCanvas = ({
         <span>{Math.round(scale * 100)}%</span>
         <button onClick={() => setScale(s => Math.max(s / 1.5, 0.5))}>-</button>
         <button onClick={() => {
-          setScale(1);
-          const canvas = canvasRef.current;
-          if (canvas) {
-            const rect = canvas.getBoundingClientRect();
-            const centerX = (rect.width - gridWidth) / 2;
-            const centerY = (rect.height - gridHeight) / 2;
-            setOffset({ x: centerX, y: centerY });
-          }
+          setScale(3);
+          setOffset({ x: 50, y: 50 });
         }}>Reset</button>
       </div>
 
