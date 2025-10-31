@@ -1,0 +1,157 @@
+.pixel-canvas-container {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.pixel-canvas {
+  display: block;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.zoom-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 8px 12px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.zoom-controls button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.zoom-controls button:hover {
+  background: #2563eb;
+}
+
+.zoom-controls button:active {
+  background: #1d4ed8;
+}
+
+.zoom-controls span {
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 50px;
+  text-align: center;
+}
+
+.pixel-tooltip {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  max-width: 200px;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.pixel-tooltip strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #3b82f6;
+}
+
+.pixel-tooltip a {
+  color: #60a5fa;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.pixel-tooltip a:hover {
+  text-decoration: underline;
+}
+
+.selection-info {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.canvas-instructions {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 12px;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.canvas-instructions div {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .zoom-controls {
+    top: 10px;
+    right: 10px;
+    padding: 6px 10px;
+    gap: 6px;
+  }
+
+  .zoom-controls button {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .zoom-controls span {
+    font-size: 12px;
+    min-width: 45px;
+  }
+
+  .pixel-tooltip {
+    top: 60px;
+    right: 10px;
+    font-size: 12px;
+    max-width: 150px;
+  }
+
+  .selection-info {
+    bottom: 60px;
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  .canvas-instructions {
+    bottom: 10px;
+    font-size: 10px;
+    padding: 8px 12px;
+    gap: 10px;
+  }
+}

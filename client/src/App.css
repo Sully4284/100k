@@ -1,0 +1,119 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-loading {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #999;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #333;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.app-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.purchase-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4);
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 50;
+  animation: pulse 2s infinite;
+}
+
+.purchase-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 50px rgba(16, 185, 129, 0.5);
+}
+
+.purchase-fab:active {
+  transform: translateY(0);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 10px 50px rgba(16, 185, 129, 0.6);
+  }
+}
+
+.login-prompt {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  z-index: 50;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .purchase-fab {
+    bottom: 20px;
+    right: 20px;
+    left: 20px;
+    padding: 14px 24px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .login-prompt {
+    bottom: 20px;
+    right: 20px;
+    left: 20px;
+    padding: 14px 24px;
+    font-size: 12px;
+    text-align: center;
+  }
+}

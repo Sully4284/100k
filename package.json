@@ -1,0 +1,20 @@
+{
+  "name": "100k-pixel-homepage",
+  "version": "1.0.0",
+  "description": "A 100,000 pixel collaborative homepage where users can purchase and customize pixels",
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "build": "cd client && npm run build"
+  },
+  "keywords": [
+    "pixels",
+    "canvas",
+    "collaborative",
+    "react",
+    "express"
+  ],
+  "author": "",
+  "license": "MIT"
+}

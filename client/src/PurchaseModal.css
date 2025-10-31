@@ -1,0 +1,143 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-container {
+  background: #1a1a1a;
+  padding: 32px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  border: 1px solid #333;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-container h2 {
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 24px;
+}
+
+.purchase-summary {
+  background: #2a2a2a;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.summary-item span {
+  color: #999;
+}
+
+.summary-item strong {
+  color: #fff;
+  font-size: 16px;
+}
+
+.modal-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.color-picker-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.color-picker-group input[type="color"] {
+  width: 60px;
+  height: 42px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background: #2a2a2a;
+  cursor: pointer;
+}
+
+.color-picker-group input[type="text"] {
+  flex: 1;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cancel-btn,
+.purchase-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.2s;
+}
+
+.cancel-btn {
+  background: #333;
+  color: white;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: #444;
+}
+
+.purchase-btn {
+  background: #10b981;
+  color: white;
+}
+
+.purchase-btn:hover:not(:disabled) {
+  background: #059669;
+}
+
+.cancel-btn:disabled,
+.purchase-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .modal-container {
+    padding: 24px 20px;
+  }
+
+  .modal-container h2 {
+    font-size: 20px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .cancel-btn,
+  .purchase-btn {
+    width: 100%;
+  }
+}
