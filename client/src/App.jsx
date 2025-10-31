@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { AuthProvider, useAuth } from './AuthContext';
 import Header from './Header';
 import PixelCanvas from './PixelCanvas';
-import AuthForm from './AuthForm';
 import PurchaseModal from './PurchaseModal';
-import AdminPanel from './AdminPanel';
 import api from './api';
 import './App.css';
 
-function AppContent() {
-  const { user, loading: authLoading, login, register, logout } = useAuth();
-
+function App() {
   const [pixels, setPixels] = useState([]);
   const [gridInfo, setGridInfo] = useState(null);
   const [stats, setStats] = useState(null);
   const [selectedPixels, setSelectedPixels] = useState([]);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
-  const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // Load initial data
@@ -46,11 +40,6 @@ function AppContent() {
   };
 
   const handlePurchaseClick = () => {
-    if (!user) {
-      alert('Please login to purchase pixels');
-      return;
-    }
-
     if (selectedPixels.length === 0) {
       alert('Please select pixels to purchase');
       return;
@@ -71,22 +60,25 @@ function AppContent() {
 
   const handlePurchase = async (pixelData) => {
     try {
-      await api.purchasePixels(pixelData);
+      // For now, just update locally without authentication
+      // You can add auth back later when needed
+      const newPixels = pixelData.map(p => ({
+        ...p,
+        id: Math.random(),
+        username: 'Anonymous',
+        purchasedAt: new Date().toISOString()
+      }));
+
+      setPixels([...pixels, ...newPixels]);
       setShowPurchaseModal(false);
       setSelectedPixels([]);
-      await loadData(); // Reload data
-      alert('Pixels purchased successfully!');
+      alert('Pixels selected! (Demo mode - no actual purchase)');
     } catch (error) {
       throw error;
     }
   };
 
-  const handleLogout = () => {
-    logout();
-    setSelectedPixels([]);
-  };
-
-  if (authLoading || loading) {
+  if (loading) {
     return (
       <div className="app-loading">
         <div className="loading-spinner"></div>
@@ -97,12 +89,7 @@ function AppContent() {
 
   return (
     <div className="app">
-      <Header
-        user={user}
-        stats={stats}
-        onLogout={handleLogout}
-        onShowAdmin={() => setShowAdminPanel(true)}
-      />
+      <Header stats={stats} />
 
       <div className="app-content">
         {gridInfo && (
@@ -115,20 +102,12 @@ function AppContent() {
           />
         )}
 
-        {selectedPixels.length > 0 && user && (
+        {selectedPixels.length > 0 && (
           <button className="purchase-fab" onClick={handlePurchaseClick}>
-            Purchase {selectedPixels.length} pixel{selectedPixels.length !== 1 ? 's' : ''} (${selectedPixels.length})
+            Select {selectedPixels.length} pixel{selectedPixels.length !== 1 ? 's' : ''} (${selectedPixels.length})
           </button>
         )}
-
-        {selectedPixels.length > 0 && !user && (
-          <div className="login-prompt">
-            Please login to purchase pixels
-          </div>
-        )}
       </div>
-
-      {!user && <AuthForm onLogin={login} onRegister={register} />}
 
       {showPurchaseModal && (
         <PurchaseModal
@@ -137,19 +116,7 @@ function AppContent() {
           onCancel={() => setShowPurchaseModal(false)}
         />
       )}
-
-      {showAdminPanel && user?.isAdmin && (
-        <AdminPanel onClose={() => setShowAdminPanel(false)} />
-      )}
     </div>
-  );
-}
-
-function App() {
-  return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
   );
 }
 
